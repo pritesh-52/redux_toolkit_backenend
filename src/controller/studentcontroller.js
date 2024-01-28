@@ -39,16 +39,11 @@ exports.updatestudent = async (req, res) => {
       "UPDATE student set name=$1 , email=$2 , phone=$3 where id=$4",
       [name, email, phone, id]
     );
-    if(updatedata.rowCount==1)
-    {
+    if (updatedata.rowCount == 1) {
       res.status(200).json({ message: "Data Has Updated" });
+    } else {
+      res.status(400).json({ error: "Data not found" });
     }
-    else{
-      res.status(400).json({error:"Data not found"});
-    }
-   
-    /*console.log(id);
-    res.status(200).send("Update");*/
   } catch (e) {
     res.status(400).json({ e });
   }
@@ -60,15 +55,11 @@ exports.deletestudent = async (req, res) => {
     const deletedata = await pool.query("DELETE FROM student where id=$1", [
       id,
     ]);
-    if(deletedata.rowCount==1)
-    {
-      res.status(200).json({message:"Delete sucesfully"});
+    if (deletedata.rowCount == 1) {
+      res.status(200).json({ message: "Delete sucesfully" });
+    } else {
+      res.status(200).json({ error: "Data Not Foudn" });
     }
-    else
-    {
-      res.status(200).json({error:"Data Not Foudn"});
-    }
-   
   } catch (e) {
     res.status(400).json(e);
   }
