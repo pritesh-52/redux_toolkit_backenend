@@ -23,8 +23,9 @@ exports.loginuser = async (req, res) => {
         { uname: user.rows[0].uname, id: user.rows[0].id },
         SECRET_KEY
       );
-      res.status(200).send({ message: "User Logged In Success" });
-      console.log(authtoken);
+      //res.status(200).send({ message: "User Logged In Success" });
+      console.log("User Login");
+      res.json({authtoken,success:true})
     } else {
       return res.json({ errors: "Inavaild Emaild Or Password" });
     }
