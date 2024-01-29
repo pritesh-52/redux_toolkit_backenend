@@ -15,10 +15,14 @@ exports.loginuser = async (req, res) => {
       const authtoken = jwt.sign(
         { uname: user.rows[0].uname, id: user.rows[0].id },
         SECRET_KEY
-      );
-      res.status(200).json({ message: "User Exists", authtoken: authtoken });
+      )
+      res.status(200).send({ message: "User Logged In Success"});
+      //res.json({authtoken,success:true});
+      console.log(authtoken);
+      
     } else {
-      res.status(400).json({ message: "Invalid username or password" });
+      return res.status(400).json({ message: "Invalid username or password"});
+      
     }
   } catch (e) {
     console.error(e);
